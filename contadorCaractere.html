@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
+    <title>Contador de Caractere</title>
+
+    <link rel="stylesheet" href="Style/Styles.css">
+    <script defer src="Js/script.js"></script>
+
+</head>
+<body>
+    <button id="toggleTheme" class="toggle-theme">🌙</button>
+    <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
+
+    <div class="boxPrincipal">
+        <h1>Contador de Caractere</h1>
+
+        <div class="box-campo2">
+            <div class="campo">
+                <textarea id="myTextArea"></textarea>
+                <div class="boxContador">
+                    <p>Caractere: <span id="contador">0</span></p>
+                </div>
+              </div>                       
+        </div>
+        
+        <button class="btnGerar" onclick="limparCampo()"> Limpar </button>
+    </div>
+</body>
+</html>

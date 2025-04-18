@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
+    <title>Gerador de senha</title>
+
+    <link rel="stylesheet" href="Style/Styles.css">
+    <script defer src="Js/script.js"></script>
+
+</head>
+<body>
+    <button id="toggleTheme" class="toggle-theme">🌙</button>
+    <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
+
+    <div class="boxPrincipal">
+        <h1>Gerador de Senha</h1>
+
+        <div class="box-campo2">
+            <div class="campo">
+                <input type="text" name="caixaResposta" id="caixaResposta" class="caixaResposta"> 
+                <img onclick="copy('caixaResposta')" src="Imagem/notas.png" class="imgCopy">
+            </div>             
+        </div>
+        
+        <button class="btnGerar"> Criar </button>
+    </div>
+</body>
+</html>
