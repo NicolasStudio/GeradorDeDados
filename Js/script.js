@@ -50,6 +50,10 @@ function redirecionarCaractere(){
     window.location.href = "contadorCaractere.html";
 } 
 
+function redirecionarData(){
+    window.location.href = "contadorData.html";
+} 
+
 // Gerar nome
 function gerarPessoa() {
     fetch("https://randomuser.me/api/?nat=br")
@@ -232,4 +236,84 @@ function limparCampo() {
     textarea.value = "";
     contador.textContent = "0";
 }
-  
+
+function limparCampoData() {
+    const dataInicial = document.getElementById("dataInicial");
+    const dataFinal = document.getElementById("dataFinal");
+
+    if (dataInicial) dataInicial.value = "";
+    if (dataFinal) dataFinal.value = "";
+
+    const spans = document.querySelectorAll(".resultados span");
+    if (spans.length >= 4) {
+        spans[0].textContent = "";
+        spans[1].textContent = "";
+        spans[2].textContent = "";
+        spans[3].textContent = "";
+    }
+
+    const visibleResult = document.querySelector(".resultados");
+
+    if (visibleResult.style.display === "block") {
+        visibleResult.style.display = "none";
+    }
+
+}
+
+function contar() {
+    const visibleResult = document.querySelector(".resultados");
+
+    if (visibleResult.style.display === "none" || !visibleResult.style.display) {
+        visibleResult.style.display = "block";
+    } else {
+        visibleResult.style.display = "none";
+    }
+
+
+
+    const data1 = document.getElementById("dataInicial").value;
+    const data2 = document.getElementById("dataFinal").value;
+
+    if (!data1 || !data2) {
+        alert("Por favor, preencha ambas as datas.");
+        visibleResult.style.display = "none";
+        return;
+    }
+
+    const inicio = new Date(data1);
+    const fim = new Date(data2);
+
+    if (fim < inicio) {
+        alert("A data final deve ser maior que a data inicial.");
+        visibleResult.style.display = "none";
+        return;
+    }
+
+    // Verificar opção do radio button
+    const opcaoBissexto = document.querySelector('input[name="anoBissexto"]:checked');
+    const considerarBissextos = opcaoBissexto && opcaoBissexto.value === "sim";
+
+    let dias = Math.floor((fim - inicio) / (1000 * 60 * 60 * 24));
+
+    // Corrige pelos anos bissextos reais se necessário
+    if (considerarBissextos) {
+        let bissextos = 0;
+        for (let ano = inicio.getFullYear(); ano <= fim.getFullYear(); ano++) {
+            if ((ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0)) {
+                const dataBissexto = new Date(ano, 1, 29); // 29 de fevereiro
+                if (dataBissexto >= inicio && dataBissexto <= fim) {
+                    bissextos++;
+                }
+            }
+        }
+        dias += bissextos; // adiciona 1 dia por bissexto verdadeiro
+    }
+
+    const anos = Math.floor(dias / 365);
+    const meses = Math.floor(dias / 30.437); // média de dias por mês
+
+    document.querySelector(".resultado-dias").textContent = dias;
+    document.querySelector(".resultado-meses").textContent = meses;
+    document.querySelector(".resultado-anos").textContent = anos;
+    document.querySelector(".resultado-total").textContent = dias + " dias";
+}

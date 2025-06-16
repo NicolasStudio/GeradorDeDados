@@ -271,18 +271,110 @@ legend {
     resize: none;
 }
 
+/* CONTADOR */
 .boxContador {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
     padding: 0.5rem;
 }
 
+/* Linha com os dois campos lado a lado */
+.grupo-datas {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Cada bloco label + input */
+.grupo-data {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 200px; /* flexível e mesmo tamanho */
+    min-width: 200px;
+}
+
+/* Label */
+.grupo-data label {
+    font-weight: bold;
+    color: var(--cor-texto);
+    font-size: clamp(10px, 4vw, 18px);
+    font-family: 'Lucida Sans', sans-serif;
+}
+
+/* Input de data */
+.grupo-data input[type="date"] {
+    width: 100%;
+    padding: 6px 10px;
+    border: 4px solid var(--cor-primaria); /* Borda desejada */
+    border-radius: 6px;
+    background-color: var(--cor-clara);
+    color: var(--cor-texto);
+    font-family: inherit;
+    cursor: pointer;
+    user-select: none; /* Impede seleção de texto */
+    box-sizing: border-box;
+    outline: none;
+}
+
+.lblTitle{
+    
+    font-size: clamp(10px, 4vw, 18px);
+    color: var(--cor-texto);
+}
+
+/* Radio */
+.boxContador input[type="radio"] {
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+input.ano {
+    cursor: pointer;
+}
+
+.opcoesAno {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+    color: var(--cor-texto);
+    cursor: pointer;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+/* PARÁGRAFOS */
 .boxContador p {
     font-weight: 400;
     font-size: clamp(8px, 4vw, 16px);
     font-family: 'Lucida Sans', sans-serif;
     color: var(--cor-texto);
 }
+
+/* RESULTADOS */
+.resultados {
+    display: none;
+    margin-top: 20px;
+    background-color: var(--cor-clara);
+    padding: 15px;
+    border-radius: 8px;
+    color: var(--cor-texto);
+}
+
+.resultados h3 {
+    margin-bottom: 10px;
+}
+
+.resultados p {
+    margin-bottom: 8px;
+}
+
+
+
 
 /* ====== MEDIA QUERIES COM AJUSTES ====== */
 
