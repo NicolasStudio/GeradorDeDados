@@ -237,6 +237,7 @@ function limparCampo() {
     contador.textContent = "0";
 }
 
+// CALCULADORA DE DATAS
 function limparCampoData() {
     const dataInicial = document.getElementById("dataInicial");
     const dataFinal = document.getElementById("dataFinal");
@@ -262,15 +263,12 @@ function limparCampoData() {
 
 function contar() {
     const visibleResult = document.querySelector(".resultados");
+    if (!visibleResult) return;
 
-    if (visibleResult.style.display === "none" || !visibleResult.style.display) {
-        visibleResult.style.display = "block";
-    } else {
-        visibleResult.style.display = "none";
-    }
+    // Mostrar resultados
+    visibleResult.style.display = "block";
 
-
-
+    // Obter datas
     const data1 = document.getElementById("dataInicial").value;
     const data2 = document.getElementById("dataFinal").value;
 
@@ -283,37 +281,48 @@ function contar() {
     const inicio = new Date(data1);
     const fim = new Date(data2);
 
+    // Validar datas
+    if (isNaN(inicio.getTime()) || isNaN(fim.getTime())) {
+        alert("Por favor, insira datas válidas.");
+        visibleResult.style.display = "none";
+        return;
+    }
+
     if (fim < inicio) {
         alert("A data final deve ser maior que a data inicial.");
         visibleResult.style.display = "none";
         return;
     }
 
-    // Verificar opção do radio button
-    const opcaoBissexto = document.querySelector('input[name="anoBissexto"]:checked');
-    const considerarBissextos = opcaoBissexto && opcaoBissexto.value === "sim";
+    // Cálculo preciso da diferença
+    let anos = fim.getFullYear() - inicio.getFullYear();
+    let meses = fim.getMonth() - inicio.getMonth();
+    let dias = fim.getDate() - inicio.getDate();
 
-    let dias = Math.floor((fim - inicio) / (1000 * 60 * 60 * 24));
-
-    // Corrige pelos anos bissextos reais se necessário
-    if (considerarBissextos) {
-        let bissextos = 0;
-        for (let ano = inicio.getFullYear(); ano <= fim.getFullYear(); ano++) {
-            if ((ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0)) {
-                const dataBissexto = new Date(ano, 1, 29); // 29 de fevereiro
-                if (dataBissexto >= inicio && dataBissexto <= fim) {
-                    bissextos++;
-                }
-            }
-        }
-        dias += bissextos; // adiciona 1 dia por bissexto verdadeiro
+    // Ajustar meses e dias negativos
+    if (dias < 0) {
+        meses--;
+        // Pegar último dia do mês anterior
+        const ultimoDiaMesAnterior = new Date(
+            fim.getFullYear(),
+            fim.getMonth(),
+            0
+        ).getDate();
+        dias += ultimoDiaMesAnterior;
     }
 
-    const anos = Math.floor(dias / 365);
-    const meses = Math.floor(dias / 30.437); // média de dias por mês
+    if (meses < 0) {
+        anos--;
+        meses += 12;
+    }
 
+    // Calcular dias totais (já inclui anos bissextos corretamente)
+    const diffEmMs = fim - inicio;
+    const diasTotais = Math.floor(diffEmMs / (1000 * 60 * 60 * 24)) + 1; // +1 para incluir o último dia
+
+    // Exibir resultados
     document.querySelector(".resultado-dias").textContent = dias;
     document.querySelector(".resultado-meses").textContent = meses;
     document.querySelector(".resultado-anos").textContent = anos;
-    document.querySelector(".resultado-total").textContent = dias + " dias";
+    document.querySelector(".resultado-total").textContent = diasTotais + " dias";
 }

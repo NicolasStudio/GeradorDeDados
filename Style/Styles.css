@@ -326,27 +326,6 @@ legend {
     color: var(--cor-texto);
 }
 
-/* Radio */
-.boxContador input[type="radio"] {
-    margin-right: 6px;
-    cursor: pointer;
-}
-
-input.ano {
-    cursor: pointer;
-}
-
-.opcoesAno {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-    color: var(--cor-texto);
-    cursor: pointer;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
 /* PARÁGRAFOS */
 .boxContador p {
     font-weight: 400;

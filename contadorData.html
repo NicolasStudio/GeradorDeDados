@@ -15,47 +15,40 @@
     <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
 
         <div class="boxPrincipal">
-            <h1>Contador de Datas</h1>
+                <h1>Contador de Datas</h1>
 
-            <div class="boxContador">
-                <div class="grupo-datas">
-                    <div class="grupo-data">
-                        <label for="dataInicial">Data Inicial:</label>
-                        <input type="date" id="dataInicial" name="dataInicial">
+                <div class="boxContador">
+                    <div class="grupo-datas">
+                        <div class="grupo-data">
+                            <label for="dataInicial">Data Inicial:</label>
+                            <input type="date" id="dataInicial" name="dataInicial">
+                        </div>
+
+                        <div class="grupo-data">
+                            <label for="dataFinal">Data Final:</label>
+                            <input type="date" id="dataFinal" name="dataFinal">
+                        </div>
                     </div>
 
-                    <div class="grupo-data">
-                        <label for="dataFinal">Data Final:</label>
-                        <input type="date" id="dataFinal" name="dataFinal">
-                    </div>
-                </div>
-
-                <script>
-                    document.querySelectorAll('input[type="date"]').forEach(input => {
-                        input.addEventListener('click', e => {
-                            input.showPicker?.(); // Chromium-based browsers
+                    <script>
+                        document.querySelectorAll('input[type="date"]').forEach(input => {
+                            input.addEventListener('click', e => {
+                                input.showPicker?.(); // Chromium-based browsers
+                            });
                         });
-                    });
-                </script>
-
-                <div class="opcoesAno">
-                    <label class="lblTitle">Incluir ano bissexto?</label>
-                    <label><input type="radio" name="anoBissexto" value="sim" checked> Sim</label>
-                    <label><input type="radio" name="anoBissexto" value="nao"> Não</label>
+                    </script>
                 </div>
+            
 
+            <div class="resultados">
+                <h3>Resultado:</h3>
+                    <p>O intervalo entre as datas corresponde a <strong><span class="resultado-anos"></span></strong> anos, <strong><span class="resultado-meses"></span></strong> meses e <strong><span class="resultado-dias"></span></strong> dias.</p>
+
+                    <p>Tempo total bruto: <strong><span class="resultado-total"></span></strong> dias.</p>
             </div>
-        
-
-        <div class="resultados">
-            <h3>Resultado:</h3>
-                <p>O intervalo entre as datas corresponde a <strong><span class="resultado-anos"></span></strong> anos, <strong><span class="resultado-meses"></span></strong> meses e <strong><span class="resultado-dias"></span></strong> dias.</p>
-
-                <p>Tempo total bruto: <strong><span class="resultado-total"></span></strong> dias.</p>
+            
+            <button class="btnGerar" onclick="contar()"> Contar </button>
+            <button class="btnGerar" onclick="limparCampoData()"> Limpar </button>
         </div>
-        
-        <button class="btnGerar" onclick="contar()"> Contar </button>
-        <button class="btnGerar" onclick="limparCampoData()"> Limpar </button>
-    </div>
 </body>
 </html>
