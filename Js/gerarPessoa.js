@@ -304,31 +304,3 @@ function limparCampos() {
         section.style.transform = '';
     }, 300);
 }
-
-// Inicializar quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Configurar botão de tema
-    const toggleThemeBtn = document.getElementById('toggleTheme');
-    const themeIcon = toggleThemeBtn?.querySelector('i');
-    
-    if (toggleThemeBtn && themeIcon) {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            themeIcon.className = 'fas fa-sun';
-        }
-        
-        toggleThemeBtn.addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
-            
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeIcon.className = 'fas fa-moon';
-            }
-        });
-    }
-});

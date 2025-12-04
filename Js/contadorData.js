@@ -318,30 +318,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Limpar o código que seta datas fixas - REMOVIDO
     // Não vamos preencher automaticamente as datas
     // O usuário deve escolher as datas manualmente ou clicar nos botões "Hoje"
-
-        // Configurar botão de tema
-    const toggleThemeBtn = document.getElementById('toggleTheme');
-    const themeIcon = toggleThemeBtn?.querySelector('i');
-    
-    if (toggleThemeBtn && themeIcon) {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            themeIcon.className = 'fas fa-sun';
-        }
-        
-        toggleThemeBtn.addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
-            
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeIcon.className = 'fas fa-moon';
-            }
-        });
-    }
-    
     atualizarDisplaysData();
 });
