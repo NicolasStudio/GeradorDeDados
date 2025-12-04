@@ -3,28 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
-    <title>Gerador de senha</title>
+    <meta name="description" content="Gerador de senhas seguras - Crie senhas robustas para proteção de contas e dados">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Gerador de Senhas Seguras | Work tools</title>
 
     <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <link rel="stylesheet" href="Style/gerarSenha.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="Js/script.js"></script>
-
+    <script defer src="Js/gerarSenha.js"></script>
 </head>
 <body>
-    <button id="toggleTheme" class="toggle-theme">🌙</button>
-    <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
-
-    <div class="boxPrincipal">
-        <h1>Gerador de Senha</h1>
-
-        <div class="box-campo2">
-            <div class="campo">
-                <input type="text" name="caixaResposta" id="caixaResposta" class="caixaResposta"> 
-                <img onclick="copy('caixaResposta')" src="Imagem/notas.png" class="imgCopy">
-            </div>             
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fas fa-key"></i> Gerador de Senhas Seguras
+                </h1>
+                <p class="page-subtitle"><center>Crie senhas robustas para proteção máxima</center></p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-        
-        <button class="btnGerar"> Criar </button>
-    </div>
+    </header>
+
+    <main class="page-container">
+        <div class="content-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-shield-alt"></i> Configurar Senha
+                </h2>
+                <p class="card-description">
+                    Personalize os critérios para gerar uma senha segura e robusta.
+                </p>
+            </div>
+
+            <div class="config-section">
+                <h3 class="section-title">
+                    <i class="fas fa-tasks"></i> Tipos de Caracteres
+                </h3>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="incluirMaiusculas" checked>
+                        <i class="fas fa-text-height"></i> Letras Maiúsculas (A-Z)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="incluirMinusculas" checked>
+                        <i class="fas fa-font"></i> Letras Minúsculas (a-z)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="incluirNumeros" checked>
+                        <i class="fas fa-hashtag"></i> Números (0-9)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="incluirSimbolos" checked>
+                        <i class="fas fa-asterisk"></i> Símbolos (!@#$%&*)
+                    </label>
+                </div>
+
+                <div class="config-item">
+                    <h3 class="section-title">
+                        <i class="fas fa-ruler-horizontal"></i> Tamanho da Senha
+                    </h3>
+                    <div class="range-container">
+                        <input type="range" 
+                               id="tamanhoSenha" 
+                               min="8" 
+                               max="32" 
+                               value="16"
+                               class="range-slider">
+                        <div class="range-values">
+                            <span class="range-min">8</span>
+                            <span class="range-value" id="tamanhoValue">16 caracteres</span>
+                            <span class="range-max">32</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="password-display-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lock"></i> Senha Gerada
+                </h3>
+                <div class="password-display">
+                    <input type="text" 
+                           id="caixaResposta" 
+                           class="password-output" 
+                           readonly
+                           placeholder="Clique em Gerar Senha...">
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="gerarSenha()">
+                    <i class="fas fa-key"></i> Gerar Senha
+                </button>
+                <button class="btn btn-secondary" onclick="copy('caixaResposta')">
+                    <i class="fas fa-copy"></i> Copiar Senha
+                </button>
+                <button class="btn btn-secondary" onclick="gerarMultiplasSenhas()">
+                    <i class="fas fa-layer-group"></i> Multiplas Senhas
+                </button>
+                <button class="btn-reset" onclick="clearPassword()">
+                    <i class="fas fa-redo"></i> Redefinir
+                </button>
+            </div>
+
+            <div class="results-section" id="multiResults" style="display: none;">
+                <h3 class="section-title">
+                    <i class="fas fa-layer-group"></i> Senhas Geradas
+                </h3>
+                
+                <div class="multiple-passwords" id="multiplePasswords">
+                    <!-- Senhas serão inseridas aqui via JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card tips-card">
+            <h3 class="card-title">
+                <i class="fas fa-lightbulb"></i> Dicas Rápidas
+            </h3>
+            
+            <div class="tips-content">
+                <p>• Use pelo menos 12 caracteres para maior segurança</p>
+                <p>• Combine diferentes tipos de caracteres</p>
+                <p>• Evite usar informações pessoais nas senhas</p>
+                <p>• Utilize um gerenciador de senhas para armazenamento seguro</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Work tools. Todos os direitos reservados.
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramentas para fins profissionais e de desenvolvimento.
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

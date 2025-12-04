@@ -3,68 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
-    <title>Gerador de Pessoas</title>
+    <meta name="description" content="Gerador de perfis fictícios - Crie dados de pessoas para testes e desenvolvimento">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Gerador de Perfis Fictícios | Work tools</title>
 
     <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <link rel="stylesheet" href="Style/gerarPessoas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="Js/script.js"></script>
-
+    <script defer src="Js/gerarPessoa.js"></script>
 </head>
 <body>
-    <div class="container-principal">
-        <button id="toggleTheme" class="toggle-theme">🌙</button>
-        <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fas fa-users"></i> Gerador de Perfis Fictícios
+                </h1>
+                <p class="page-subtitle">Crie dados de pessoas para testes e desenvolvimento</p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
-        <h1>Gerador de Pessoas</h1>
-    
-        <fieldset class="box-campo">
-            <div class="campo">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome">
-                <img onclick="copy('nome')" src="Imagem/notas.png" class="imgCopy">
+    <main class="page-container">
+        <div class="content-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-user-plus"></i> Gerar Novo Perfil
+                </h2>
+                <p class="card-description">
+                    Clique no botão abaixo para gerar um perfil completo com dados fictícios.
+                </p>
             </div>
-            
-            <div class="campo">
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf">
-                <img onclick="copy('cpf')" src="Imagem/notas.png" class="imgCopy">
+
+            <div class="action-section">
+                <button class="btn btn-primary btn-large" onclick="gerarPessoa()">
+                    <i class="fas fa-user-plus"></i> Gerar Novo Perfil
+                </button>
+                <button class="btn btn-secondary" onclick="limparCampos()">
+                    <i class="fas fa-eraser"></i> Limpar Todos os Campos
+                </button>
             </div>
-    
-            <div class="campo">
-                <label for="rg">RG:</label>
-                <input type="text" id="rg">
-                <img onclick="copy('rg')" src="Imagem/notas.png" class="imgCopy">
+
+            <div class="profile-section" id="profileSection">
+                <h3 class="section-title">
+                    <i class="fas fa-id-card"></i> Dados do Perfil
+                </h3>
+                
+                <div class="profile-grid">
+                    <!-- Informações Pessoais -->
+                    <div class="profile-group">
+                        <h4 class="group-title">
+                            <i class="fas fa-user"></i> Informações Pessoais
+                        </h4>
+                        
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-signature"></i> Nome Completo
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="nome" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('nome')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Data de Nascimento
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="dataNasc" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('dataNasc')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-venus-mars"></i> Gênero
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="genero" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('genero')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentos -->
+                    <div class="profile-group">
+                        <h4 class="group-title">
+                            <i class="fas fa-file-alt"></i> Documentos
+                        </h4>
+                        
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-id-card"></i> CPF
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="cpf" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('cpf')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-address-card"></i> RG
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="rg" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('rg')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contato -->
+                    <div class="profile-group">
+                        <h4 class="group-title">
+                            <i class="fas fa-address-book"></i> Contato
+                        </h4>
+                        
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-envelope"></i> E-mail
+                            </label>
+                            <div class="input-with-action">
+                                <input type="email" id="email" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('email')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-phone"></i> Telefone Fixo
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="telFixo" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('telFixo')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-mobile-alt"></i> Celular
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="telCelular" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('telCelular')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Endereço -->
+                    <div class="profile-group">
+                        <h4 class="group-title">
+                            <i class="fas fa-home"></i> Endereço
+                        </h4>
+                        
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-map-marker-alt"></i> Endereço Completo
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="endereco" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('endereco')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-city"></i> Cidade/Estado
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="cidadeEstado" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('cidadeEstado')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="form-label">
+                                <i class="fas fa-mail-bulk"></i> CEP
+                            </label>
+                            <div class="input-with-action">
+                                <input type="text" id="cep" class="form-control pessoa-input" readonly>
+                                <button class="btn-copy" onclick="copiarCampo('cep')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn btn-secondary" onclick="copiarPerfilCompleto()">
+                        <i class="fas fa-copy"></i> Copiar Perfil Completo
+                    </button>
+                    <button class="btn btn-text" onclick="exportarPerfil()">
+                        <i class="fas fa-download"></i> Exportar Perfil
+                    </button>
+                </div>
             </div>
-    
-            <div class="campo">
-                <label for="dataNasc">Data de Nascimento:</label>
-                <input type="text" id="dataNasc">
-                <img onclick="copy('dataNasc')" src="Imagem/notas.png" class="imgCopy">
+        </div>
+
+        <div class="content-card info-card">
+            <h3 class="card-title">
+                <i class="fas fa-info-circle"></i> Sobre os Dados Gerados
+            </h3>
+            <div class="info-content">
+                <p><i class="fas fa-check-circle"></i> Todos os dados são gerados aleatoriamente e não correspondem a pessoas reais.</p>
+                <p><i class="fas fa-check-circle"></i> Ideal para testes de sistemas, prototipagem e ambientes de desenvolvimento.</p>
+                <p><i class="fas fa-check-circle"></i> Nenhum dado pessoal real é utilizado ou armazenado.</p>
             </div>
-    
-            <div class="campo">
-                <label for="telFixo">Tell Fixo:</label>
-                <input type="text" id="telFixo">
-                <img onclick="copy('telFixo')" src="Imagem/notas.png" class="imgCopy">
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Gerador de Perfis Fictícios | Work tools
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramenta para geração de dados fictícios para fins de desenvolvimento e testes.
+                </p>
             </div>
-    
-            <div class="campo">
-                <label for="telCelular">Tell Celular:</label>
-                <input type="text" id="telCelular">
-                <img onclick="copy('telCelular')" src="Imagem/notas.png" class="imgCopy">
-            </div>
-    
-            <div class="campo">
-                <label for="email">Email:</label>
-                <input type="email" id="email">
-                <img onclick="copy('email')" src="Imagem/notas.png" class="imgCopy">
-            </div>
-    
-            <button onclick="gerarPessoa()" class="btnGerar">Gerar Pessoa</button>
-        </fieldset>
-    </div>
-    
-    
+        </div>
+    </footer>
 </body>
 </html>
-

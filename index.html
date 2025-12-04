@@ -3,22 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
-    <title>Gerador de senha</title>
-
+    <meta name="description" content="Ferramentas profissionais para gerar senhas, pessoas fictícias, contagem de caracteres e datas">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Work tools | Ferramentas Profissionais</title>
     <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
     <script defer src="Js/script.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <i class="fas fa-tools logo-icon"></i>
+                <h1>Work tools</h1>
+                <span class="logo-subtitle-index">Ferramentas Profissionais</span>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
-    <button id="toggleTheme" class="toggle-theme">🌙</button>
-    
-    <div class="boxMenu">
-        <button class="btnGerar" onclick="redirecionarPessoa()">Gerar Pessoas</button>
-        <button class="btnGerar" onclick="redirecionarSenha()">Gerar Senhas</button>
-        <button class="btnGerar" onclick="redirecionarCaractere()">Contador Caractere</button>
-        <button class="btnGerar" onclick="redirecionarData()">Contador de Datas</button>
-    </div>
+    <main class="main-content">
+        <div class="container">
+            <section class="hero-section">
+                <div class="hero-text">
+                    <h2>Ferramentas Essenciais para Produtividade</h2>
+                    <p class="hero-description">
+                        Conjunto de utilitários profissionais para otimizar seu fluxo de trabalho. 
+                        Gere dados seguros, faça cálculos precisos e melhore sua eficiência operacional.
+                    </p>
+                </div>
+            </section>
+
+            <section class="tools-grid">
+                <div class="tool-card" onclick="redirecionarPessoa()">
+                    <div class="tool-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Gerador de Pessoas</h3>
+                        <p>Crie perfis fictícios completos para testes e desenvolvimento</p>
+                        <span class="tool-tag">Dados</span>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="redirecionarSenha()">
+                    <div class="tool-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Gerador de Senhas</h3>
+                        <p>Crie senhas seguras e robustas com múltiplas opções de personalização</p>
+                        <span class="tool-tag">Segurança</span>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="redirecionarCaractere()">
+                    <div class="tool-icon">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Contador de Caracteres</h3>
+                        <p>Analise textos com precisão e obtenha métricas detalhadas</p>
+                        <span class="tool-tag">Análise</span>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="redirecionarData()">
+                    <div class="tool-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Calculadora de Datas</h3>
+                        <p>Calcule intervalos entre datas com precisão e múltiplos formatos</p>
+                        <span class="tool-tag">Cálculo</span>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <h3 class="section-title">Recursos Profissionais</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Segurança</h4>
+                        <p>Processamento local, sem armazenamento de dados</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Eficiência</h4>
+                        <p>Resultados instantâneos para otimizar seu tempo</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-palette"></i>
+                        <h4>Personalização</h4>
+                        <p>Configurações adaptáveis às suas necessidades</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Responsivo</h4>
+                        <p>Interface otimizada para todos os dispositivos</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Work tools. Todos os direitos reservados.
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramentas para fins profissionais e de desenvolvimento.
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

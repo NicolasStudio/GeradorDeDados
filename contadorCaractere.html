@@ -3,30 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
-    <title>Contador de Caractere</title>
-
+    <meta name="description" content="Contador de caracteres profissional - Analise textos com precisão e obtenha métricas detalhadas">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Contador de Caracteres | Work tools</title>
+    
     <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <link rel="stylesheet" href="Style/contadorCaractere.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script defer src="Js/script.js"></script>
-
+    <script defer src="Js/scriptContadorCaractere.js"></script>
 </head>
 <body>
-    <button id="toggleTheme" class="toggle-theme">🌙</button>
-    <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
-
-    <div class="boxPrincipal">
-        <h1>Contador de Caractere</h1>
-
-        <div class="box-campo2">
-            <div class="campo">
-                <textarea id="myTextArea"></textarea>
-                <div class="boxContador">
-                    <p>Caractere: <span id="contador">0</span></p>
-                </div>
-              </div>                       
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fas fa-text-height"></i> Contador de Caracteres
+                </h1>
+                <p class="page-subtitle">Análise textual completa</p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-        
-        <button class="btnGerar" onclick="limparCampo()"> Limpar </button>
-    </div>
+    </header>
+
+    <main class="page-container">
+        <div class="content-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-chart-bar"></i> Análise de Texto
+                </h2>
+                <p class="card-description">
+                    Insira seu texto abaixo para obter uma análise completa com diversas métricas.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <div class="textarea-container">
+                    <textarea 
+                        id="myTextArea" 
+                        class="form-control textarea-large"
+                        placeholder="Digite ou cole seu texto aqui..."
+                        rows="8"
+                        autofocus
+                    ></textarea>
+                    <div class="textarea-footer">
+                        <span class="char-count-info">
+                            <i class="fas fa-keyboard"></i> 
+                            Caracteres: <span id="contador" class="count-value">0</span>
+                        </span>
+                        <button class="btn btn-text" onclick="limparCampo()">
+                            <i class="fas fa-broom"></i> Limpar Campo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-results">
+                <h3 class="section-title">
+                    <i class="fas fa-chart-pie"></i> Estatísticas Detalhadas
+                </h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Caracteres com Espaços</h4>
+                            <div class="stat-value" id="countWithSpaces">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-text-width"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Caracteres sem Espaços</h4>
+                            <div class="stat-value" id="countWithoutSpaces">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-paragraph"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Palavras</h4>
+                            <div class="stat-value" id="wordCount">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-sentence"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Sentenças</h4>
+                            <div class="stat-value" id="sentenceCount">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Linhas</h4>
+                            <div class="stat-value" id="lineCount">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Tempo de Leitura</h4>
+                            <div class="stat-value" id="readingTime">0 min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-options">
+                <h3 class="section-title">
+                    <i class="fas fa-sliders-h"></i> Opções
+                </h3>
+                
+                <div class="options-grid">
+                    <div class="option-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="countSpaces" checked>
+                            Incluir espaços na contagem
+                        </label>
+                    </div>
+                    
+                    <div class="option-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ignoreNumbers">
+                            Ignorar números
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="copiarTexto()">
+                    <i class="fas fa-copy"></i> Copiar Texto
+                </button>
+                
+                <button class="btn btn-secondary" onclick="exportarDados()">
+                    <i class="fas fa-download"></i> Exportar Estatísticas
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Contador de Caracteres | Work tools
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramenta profissional para análise e contagem de texto.
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

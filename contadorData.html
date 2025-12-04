@@ -3,52 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="16x16"  href="Imagem/pesquisa.png">
-    <title>Contador de Data</title>
+    <meta name="description" content="Calculadora de intervalo entre datas - Ferramenta profissional para cálculo preciso de períodos">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Calculadora de Datas | Work tools</title>
 
     <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/contadorData.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="Js/script.js"></script>
-
+    <script defer src="Js/contadorData.js"></script>
 </head>
 <body>
-    <button id="toggleTheme" class="toggle-theme">🌙</button>
-    <button class="btnRetornar" onclick="retornar()"><img src="Imagem/seta.png" alt="Retornar" class="imgRetornar"></button>
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fas fa-calendar-alt"></i> Calculadora de Datas
+                </h1>
+                <p class="page-subtitle"><center>Cálculo preciso de intervalos temporais</center></p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
-        <div class="boxPrincipal">
-                <h1>Contador de Datas</h1>
+    <main class="page-container">
+        <div class="content-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-calculator"></i> Calcular Intervalo
+                </h2>
+                <p class="card-description">
+                    Selecione duas datas para calcular o período entre elas com precisão.
+                </p>
+            </div>
 
-                <div class="boxContador">
-                    <div class="grupo-datas">
-                        <div class="grupo-data">
-                            <label for="dataInicial">Data Inicial:</label>
-                            <input type="date" id="dataInicial" name="dataInicial">
+            <div class="date-selector">
+                <div class="date-input-group">
+                    <div class="date-input">
+                        <label class="form-label">
+                            <i class="fas fa-calendar-plus"></i> Data Inicial
+                        </label>
+                        <div class="date-input-wrapper">
+                            <input type="date" id="dataInicial" name="dataInicial" class="form-control date-picker">
+                            <button class="date-today" onclick="definirDataAtual('dataInicial')" type="button">
+                                <i class="fas fa-bolt"></i> Hoje
+                            </button>
                         </div>
-
-                        <div class="grupo-data">
-                            <label for="dataFinal">Data Final:</label>
-                            <input type="date" id="dataFinal" name="dataFinal">
-                        </div>
+                        <div class="date-display" id="displayDataInicial">--/--/----</div>
                     </div>
 
-                    <script>
-                        document.querySelectorAll('input[type="date"]').forEach(input => {
-                            input.addEventListener('click', e => {
-                                input.showPicker?.(); // Chromium-based browsers
-                            });
-                        });
-                    </script>
+                    <div class="date-separator">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+
+                    <div class="date-input">
+                        <label class="form-label">
+                            <i class="fas fa-calendar-check"></i> Data Final
+                        </label>
+                        <div class="date-input-wrapper">
+                            <input type="date" id="dataFinal" name="dataFinal" class="form-control date-picker">
+                            <button class="date-today" onclick="definirDataAtual('dataFinal')" type="button">
+                                <i class="fas fa-bolt"></i> Hoje
+                            </button>
+                        </div>
+                        <div class="date-display" id="displayDataFinal">--/--/----</div>
+                    </div>
                 </div>
-            
-
-            <div class="resultados">
-                <h3>Resultado:</h3>
-                    <p>O intervalo entre as datas corresponde a <strong><span class="resultado-anos"></span></strong> anos, <strong><span class="resultado-meses"></span></strong> meses e <strong><span class="resultado-dias"></span></strong> dias.</p>
-
-                    <p>Tempo total bruto: <strong><span class="resultado-total"></span></strong> dias.</p>
             </div>
-            
-            <button class="btnGerar" onclick="contar()"> Contar </button>
-            <button class="btnGerar" onclick="limparCampoData()"> Limpar </button>
+
+            <div class="options-section">
+                <h3 class="section-title">
+                    <i class="fas fa-sliders-h"></i> Configurações
+                </h3>
+                
+                <div class="options-grid">
+                    <div class="option-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="incluirBissexto" checked>
+                            <i class="fas fa-calendar-star"></i> Incluir cálculo de ano bissexto
+                        </label>
+                        <p class="option-description">Considera anos com 366 dias no cálculo preciso</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary btn-large" onclick="contar()">
+                    <i class="fas fa-calculator"></i> Calcular Intervalo
+                </button>
+                <button class="btn btn-secondary" onclick="limparCampoData()">
+                    <i class="fas fa-eraser"></i> Limpar Datas
+                </button>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3 class="section-title">
+                    <i class="fas fa-chart-line"></i> Resultado do Cálculo
+                </h3>
+                
+                <div class="results-grid">
+                    <div class="result-card main-result">
+                        <div class="result-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="result-content">
+                            <h4>Intervalo Total</h4>
+                            <div class="result-value">
+                                <span id="resultadoAnos">0</span> anos, 
+                                <span id="resultadoMeses">0</span> meses e 
+                                <span id="resultadoDias">0</span> dias
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detailed-results">
+                    <h4 class="subsection-title">
+                        <i class="fas fa-info-circle"></i> Detalhamento
+                    </h4>
+                    
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Data Inicial:</span>
+                            <span class="detail-value" id="detailDataInicial">--/--/----</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Data Final:</span>
+                            <span class="detail-value" id="detailDataFinal">--/--/----</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Meses Completos:</span>
+                            <span class="detail-value" id="mesesCompletos">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dias Restantes:</span>
+                            <span class="detail-value" id="diasRestantes">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dias Totais:</span>
+                            <span class="detail-value" id="resultadoTotal">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dias Úteis:</span>
+                            <span class="detail-value" id="diasUteis">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Anos Bissextos:</span>
+                            <span class="detail-value" id="anosBissextos">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Configuração:</span>
+                            <span class="detail-value" id="configInfo">Ano comum</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-section">
+                    <button class="btn btn-secondary" onclick="exportarResultados()">
+                        <i class="fas fa-download"></i> Exportar Resultados
+                    </button>
+                    <button class="btn btn-text" onclick="copiarResultados()">
+                        <i class="fas fa-copy"></i> Copiar Resultado
+                    </button>
+                </div>
+            </div>
         </div>
+
+        <div class="content-card info-card">
+            <h3 class="card-title">
+                <i class="fas fa-lightbulb"></i> Sobre Anos Bissextos
+            </h3>
+            <div class="info-content">
+                <div class="info-item">
+                    <i class="fas fa-calendar-star"></i>
+                    <div>
+                        <h4>O que é um Ano Bissexto?</h4>
+                        <p>Um ano bissexto possui 366 dias em vez de 365. O dia extra (29 de fevereiro) é adicionado para corrigir a diferença entre o ano calendário (365 dias) e o ano solar (aproximadamente 365,2422 dias).</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calculator"></i>
+                    <div>
+                        <h4>Como identificar um Ano Bissexto?</h4>
+                        <p>Um ano é bissexto se for divisível por 4, exceto anos divisíveis por 100, a menos que também sejam divisíveis por 400. Exemplo: 2024 (sim), 2100 (não), 2000 (sim).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Calculadora de Datas | Work tools
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramenta profissional para cálculo de intervalos temporais.
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

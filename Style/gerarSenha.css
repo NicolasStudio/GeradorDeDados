@@ -1,0 +1,489 @@
+/* ====== ESTILOS ESPECÍFICOS PARA GERADOR DE SENHAS ====== */
+
+/* Header da página */
+.page-header-title {
+    flex: 1;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 300;
+    margin-top: 0.25rem;
+}
+
+/* Card header */
+.card-header {
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.dark-theme .card-title {
+    color: #f1f5f9;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.dark-theme .card-description {
+    color: #94a3b8;
+}
+
+/* Seções */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.dark-theme .section-title {
+    color: #f1f5f9;
+}
+
+.config-section {
+    margin: 2rem 0;
+}
+
+/* Checkbox dos tipos de caracteres */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1e293b;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.dark-theme .checkbox-label {
+    color: #f1f5f9;
+    border-color: #334155;
+    background: #0f172a;
+}
+
+.checkbox-label:hover {
+    border-color: #2563eb;
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.dark-theme .checkbox-label:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #2563eb;
+}
+
+.checkbox-label i {
+    color: #2563eb;
+    width: 20px;
+    text-align: center;
+}
+
+/* Controle de range */
+.config-item {
+    margin: 2rem 0;
+}
+
+.range-container {
+    margin-top: 1rem;
+}
+
+.range-slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e8f0;
+    border-radius: 3px;
+    outline: none;
+}
+
+.dark-theme .range-slider {
+    background: #334155;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background: #2563eb;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.range-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: #2563eb;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.range-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.dark-theme .range-values {
+    color: #94a3b8;
+}
+
+.range-value {
+    font-weight: 600;
+    color: #2563eb;
+    font-size: 1rem;
+}
+
+/* CAMPO DA SENHA GERADA - ESTILO CORRIGIDO */
+.password-display-section {
+    margin: 2rem 0;
+}
+
+.password-display {
+    margin-top: 1rem;
+}
+
+.password-output {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.3rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    letter-spacing: 2px;
+    background: #ffffff;
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    color: #1e293b;
+    text-align: center;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    display: block;
+}
+
+.dark-theme .password-output {
+    background: #1e293b;
+    border-color: #3b82f6;
+    color: #f1f5f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.password-output:focus {
+    outline: none;
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+    transform: translateY(-2px);
+}
+
+.dark-theme .password-output:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3);
+}
+
+.password-output::placeholder {
+    color: #64748b;
+    opacity: 0.7;
+    font-weight: 400;
+    letter-spacing: normal;
+    font-family: 'Inter', sans-serif;
+}
+
+.dark-theme .password-output::placeholder {
+    color: #94a3b8;
+}
+
+/* Botões de ação */
+.action-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.action-buttons .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+/* Botão Primary */
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão Secondary */
+.btn-secondary {
+    background: transparent;
+    color: #2563eb;
+    border: 2px solid #2563eb;
+}
+
+.dark-theme .btn-secondary {
+    color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.btn-secondary:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.dark-theme .btn-secondary:hover {
+    background: #3b82f6;
+}
+
+/* BOTÃO DE REDEFINIR - ESTILO CORRIGIDO */
+.btn-reset {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    color: #64748b;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 140px;
+}
+
+.dark-theme .btn-reset {
+    background: #0f172a;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+.btn-reset:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.dark-theme .btn-reset:hover {
+    background: #334155;
+    color: #f1f5f9;
+}
+
+/* Múltiplas senhas */
+.results-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+.dark-theme .results-section {
+    border-top-color: #334155;
+}
+
+.multiple-passwords {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.password-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.dark-theme .password-item {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+.password-item:hover {
+    border-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .password-item:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.password-text {
+    flex: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1.1rem;
+    color: #1e293b;
+    word-break: break-all;
+    padding-right: 1rem;
+    letter-spacing: 1px;
+}
+
+.dark-theme .password-text {
+    color: #f1f5f9;
+}
+
+.password-copy {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.dark-theme .password-copy {
+    background: #3b82f6;
+}
+
+.password-copy:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .password-copy:hover {
+    background: #60a5fa;
+}
+
+/* Cartão de dicas */
+.tips-card {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.dark-theme .tips-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #334155;
+}
+
+.tips-content {
+    margin-top: 1rem;
+}
+
+.tips-content p {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #1e293b;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.dark-theme .tips-content p {
+    color: #f1f5f9;
+}
+
+.tips-content p:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+/* Responsividade específica para gerador de senhas */
+@media (max-width: 768px) {
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .password-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8rem;
+    }
+    
+    .password-copy {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .password-output {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    
+    .checkbox-label {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+}
