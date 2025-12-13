@@ -18,6 +18,9 @@ function redirecionarData(){
     window.location.href = "contadorData.html";
 }
 
+function redirecionarCorrigirTexto(){
+    window.location.href = "corrigirTexto.html";
+}
 
 // ====== GERENCIAMENTO DE TEMA (funciona em todas as páginas) ======
 

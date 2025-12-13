@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Corretor e melhorador de texto profissional - Corrija ortografia, gramática e melhore sua escrita">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Corretor de Texto | Work Tools</title>
+    <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <link rel="stylesheet" href="Style/styleCorretorTexto.css">
+    <script defer src="Js/script.js"></script>
+    <script defer src="Js/scriptCorretorTexto.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fas fa-spell-check"></i> Corretor de Texto
+                </h1>
+                <p class="page-subtitle">Corrija e melhore sua escrita automaticamente</p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="content-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-edit"></i> Editor de Texto
+                </h2>
+                <p class="card-description">
+                    Digite ou cole seu texto abaixo e utilize as opções para corrigir e melhorar.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <div class="textarea-container">
+                    <textarea 
+                        id="myTextAreaCorretor" 
+                        class="form-control textarea-large"
+                        placeholder="Digite ou cole seu texto aqui... Ex: 'hoje eu vou na feira comprar frutas'"
+                        rows="8"
+                        autofocus
+                    ></textarea>
+                    <div class="textarea-footer">
+                        <span class="char-count-info">
+                            <i class="fas fa-font"></i> 
+                            Caracteres: <span id="contador" class="count-value">0</span>
+                        </span>
+                        <span class="word-count-info">
+                            <i class="fas fa-paragraph"></i>
+                            Palavras: <span id="wordCount" class="count-value">0</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="correction-options">
+                <h3 class="section-title">
+                    <i class="fas fa-sliders-h"></i> Transformações de Texto
+                </h3>
+                
+                <div class="options-grid">
+                    <div class="option-card">
+                        <div class="option-header">
+                            <i class="fas fa-text-height"></i>
+                            <h4>Formatação</h4>
+                        </div>
+                        <div class="option-content">
+                            <label class="radio-label">
+                                <input type="radio" name="formatacao" id="formatacaoNenhuma" checked>
+                                <span class="radio-text">Nenhuma (mantém original)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="formatacao" id="formatacaoMaiuscula">
+                                <span class="radio-text">TODAS MAIÚSCULAS</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="formatacao" id="formatacaoMinuscula">
+                                <span class="radio-text">todas minúsculas</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="formatacao" id="formatacaoPrimeiraMaiuscula">
+                                <span class="radio-text">Primeira Letra Maiúscula (início frases)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="formatacao" id="formatacaoAposPontuacao">
+                                <span class="radio-text">Maiúscula após . ; ! ? (e início texto)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="formatacao" id="formatacaoAlternada">
+                                <span class="radio-text">LeTrAs AlTeRnAdAs</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="option-header">
+                            <i class="fas fa-random"></i>
+                            <h4>Modificações</h4>
+                        </div>
+                        <div class="option-content">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="inverterTexto">
+                                <span class="checkbox-text">Inverter Ordem do Texto</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="removerEspacosDuplos">
+                                <span class="checkbox-text">Remover Espaços Duplos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="removerLinhasVazias">
+                                <span class="checkbox-text">Remover Linhas Vazias</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="melhoriaOrtografica">
+                                <span class="checkbox-text">Correção Ortográfica</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary btn-large" onclick="iniciarCorrecao()">
+                    <i class="fas fa-magic"></i> Aplicar Transformações
+                </button>
+                <button class="btn btn-secondary" onclick="copiarTexto(event)">
+                    <i class="fas fa-copy"></i> Copiar Texto
+                </button>
+                <button class="btn btn-secondary" onclick="limparCampo()">
+                    <i class="fas fa-eraser"></i> Limpar Campo
+                </button>
+                <button class="btn btn-text" onclick="exportarTexto()">
+                    <i class="fas fa-download"></i> Exportar
+                </button>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3 class="section-title">
+                    <i class="fas fa-chart-bar"></i> Estatísticas da Correção
+                </h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Caracteres Modificados</h4>
+                            <div class="stat-value" id="modifiedChars">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-paragraph"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Palavras Modificadas</h4>
+                            <div class="stat-value" id="modifiedWords">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Tempo de Processamento</h4>
+                            <div class="stat-value" id="processingTime">0ms</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Transformações Aplicadas</h4>
+                            <div class="stat-value" id="appliedTransformations">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card info-card">
+            <h3 class="card-title">
+                <i class="fas fa-lightbulb"></i> Como Funciona
+            </h3>
+            <div class="info-content">
+                <div class="info-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>Transformações Imediatas</h4>
+                        <p>Alterações de formatação são aplicadas instantaneamente ao texto.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>Correção do Texto</h4>
+                        <p>Melhorias simulam correções inteligentes de ortografia e estilo.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <h4>Estatísticas Detalhadas</h4>
+                        <p>Visualize o impacto das transformações com métricas precisas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work Tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Corretor de Texto | Work Tools
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramenta profissional para correção e melhoria de textos.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
