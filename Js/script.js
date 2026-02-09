@@ -22,6 +22,12 @@ function redirecionarCorrigirTexto(){
     window.location.href = "corrigirTexto.html";
 }
 
+
+function redirecionarLeitorPDF(){
+    window.location.href = "leitorPDF.html";
+}
+
+
 // ====== GERENCIAMENTO DE TEMA (funciona em todas as páginas) ======
 
 // Inicializar tema quando a página carregar
