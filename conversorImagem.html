@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ferramentas profissionais para gerar senhas, pessoas fictícias, contagem de caracteres e datas">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Work tools | Ferramentas Profissionais</title>
+    <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/conversorImagem.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <script defer src="Js/script.js"></script>
+    <script defer src="Js/conversorImagem.js"></script>
+    <!-- Bibliotecas necessárias -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fa-regular fa-file-image"></i> Conversor de Imagens
+                </h1>
+                <p class="page-subtitle"><center>Selecione um arquivo de imagem para converter</center></p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="simple-converter">
+        <!-- Área de upload -->
+        <div class="upload-box" id="uploadBox">
+            <div class="upload-content">
+                <span class="upload-icon">📂</span>
+                <h3>Selecionar arquivos</h3>
+                <p class="upload-hint">Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <a href="#" onclick="document.getElementById('simpleFileInput').click(); return false;">Registrar-se</a></p>
+                <input type="file" id="simpleFileInput" accept="image/*" multiple style="display: none;">
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div class="toast-container" id="toastContainer"></div>
+
+        <!-- Arquivo selecionado (modo único) -->
+        <div class="selected-file-row" id="selectedFileRow" style="display: none;">
+            <div class="file-info">
+                <span class="file-icon">🖼️</span>
+                <span class="file-name" id="fileName"></span>
+                <span class="file-size" id="fileSize"></span>
+                <button class="remove-file" onclick="simpleConverter.clearFile()">✕</button>
+            </div>
+            <div class="quick-convert">
+                <span class="quick-label">Conversão rápida</span>
+                <button class="convert-btn" id="convertBtn" onclick="simpleConverter.convert()">Converter</button>
+            </div>
+        </div>
+
+        <!-- Dropdown de formatos -->
+        <div class="format-selector">
+            <label class="format-label">Converter para:</label>
+            <div class="format-dropdown">
+                <button class="dropdown-toggle" id="dropdownToggle">
+                    <span id="selectedFormatText">Selecione o formato</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-search">
+                        <input type="text" placeholder="Buscar formatos..." id="formatSearch">
+                    </div>
+                    <div class="dropdown-items" id="dropdownItems">
+                        <!-- Lista completa de formatos -->
+                        <div class="dropdown-item" data-format="jpg">
+                            <span class="item-icon">🖼️</span>
+                            <span class="item-name">JPG</span>
+                            <span class="item-ext">.jpg</span>
+                        </div>
+                        <div class="dropdown-item" data-format="jpeg">
+                            <span class="item-icon">🖼️</span>
+                            <span class="item-name">JPEG</span>
+                            <span class="item-ext">.jpeg</span>
+                        </div>
+                        <div class="dropdown-item" data-format="png">
+                            <span class="item-icon">🖼️</span>
+                            <span class="item-name">PNG</span>
+                            <span class="item-ext">.png</span>
+                        </div>
+                        <div class="dropdown-item" data-format="gif">
+                            <span class="item-icon">🎞️</span>
+                            <span class="item-name">GIF</span>
+                            <span class="item-ext">.gif</span>
+                        </div>
+                        <div class="dropdown-item" data-format="bmp">
+                            <span class="item-icon">🎨</span>
+                            <span class="item-name">BMP</span>
+                            <span class="item-ext">.bmp</span>
+                        </div>
+                        <div class="dropdown-item" data-format="webp">
+                            <span class="item-icon">🌐</span>
+                            <span class="item-name">WEBP</span>
+                            <span class="item-ext">.webp</span>
+                        </div>
+                        <div class="dropdown-item" data-format="tiff">
+                            <span class="item-icon">📇</span>
+                            <span class="item-name">TIFF</span>
+                            <span class="item-ext">.tiff</span>
+                        </div>
+                        <div class="dropdown-item" data-format="tif">
+                            <span class="item-icon">📇</span>
+                            <span class="item-name">TIF</span>
+                            <span class="item-ext">.tif</span>
+                        </div>
+                        <div class="dropdown-item" data-format="ico">
+                            <span class="item-icon">🔷</span>
+                            <span class="item-name">ICO</span>
+                            <span class="item-ext">.ico</span>
+                        </div>
+                        <div class="dropdown-item" data-format="cur">
+                            <span class="item-icon">🖱️</span>
+                            <span class="item-name">CUR</span>
+                            <span class="item-ext">.cur</span>
+                        </div>
+                        <div class="dropdown-item" data-format="svg">
+                            <span class="item-icon">📐</span>
+                            <span class="item-name">SVG</span>
+                            <span class="item-ext">.svg</span>
+                        </div>
+                        <div class="dropdown-item" data-format="eps">
+                            <span class="item-icon">📊</span>
+                            <span class="item-name">EPS</span>
+                            <span class="item-ext">.eps</span>
+                        </div>
+                        <div class="dropdown-item" data-format="psd">
+                            <span class="item-icon">🎭</span>
+                            <span class="item-name">PSD</span>
+                            <span class="item-ext">.psd</span>
+                        </div>
+                        <div class="dropdown-item" data-format="ai">
+                            <span class="item-icon">✒️</span>
+                            <span class="item-name">AI</span>
+                            <span class="item-ext">.ai</span>
+                        </div>
+                        <div class="dropdown-item" data-format="raw">
+                            <span class="item-icon">📸</span>
+                            <span class="item-name">RAW</span>
+                            <span class="item-ext">.raw</span>
+                        </div>
+                        <div class="dropdown-item" data-format="heic">
+                            <span class="item-icon">📱</span>
+                            <span class="item-name">HEIC</span>
+                            <span class="item-ext">.heic</span>
+                        </div>
+                        <div class="dropdown-item" data-format="avif">
+                            <span class="item-icon">✨</span>
+                            <span class="item-name">AVIF</span>
+                            <span class="item-ext">.avif</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview dos arquivos selecionados -->
+        <div class="files-preview" id="filesPreview" style="display: none;">
+            <div class="preview-header">
+                <span>Arquivos selecionados:</span>
+                <button class="clear-all" onclick="simpleConverter.clearAllFiles()">Limpar todos</button>
+            </div>
+            <div class="preview-list" id="previewList"></div>
+        </div>
+
+        <!-- Área de progresso -->
+        <div class="progress-area" id="progressArea" style="display: none;">
+            <div class="progress-info">
+                <span class="progress-filename">Convertendo...</span>
+                <span class="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <!-- Modal de Download -->
+        <div class="modal" id="downloadModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>✅ Conversão Concluída!</h3>
+                    <button class="modal-close" onclick="simpleConverter.closeModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage"></p>
+                    <div class="download-list" id="downloadList"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="simpleConverter.closeModal()">Fechar</button>
+                    <button class="btn btn-primary" id="downloadAllBtn">Download Todos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Work tools. Todos os direitos reservados.
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramentas para fins profissionais e de desenvolvimento.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

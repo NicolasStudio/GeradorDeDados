@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ferramentas profissionais para gerar senhas, pessoas fictícias, contagem de caracteres e datas">
+    <link rel="icon" type="image/png" sizes="16x16" href="Imagem/pesquisa.png">
+    <title>Work tools | Ferramentas Profissionais</title>
+    <link rel="stylesheet" href="Style/Styles.css">
+    <link rel="stylesheet" href="Style/styleHeader.css">
+    <link rel="stylesheet" href="Style/conversorPDF.css">
+    <link rel="stylesheet" href="Style/styleFooter.css">
+    <script defer src="Js/script.js"></script>
+    <script defer src="Js/conversorPDF.js"></script>
+    <!-- Bibliotecas necessárias -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="page-header-title">
+                <h1 class="page-title">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i> Conversor de PDF 
+                </h1>
+                <p class="page-subtitle"><center>Selecione um arquivo PDF para converter</center></p>
+            </div>
+            <button id="toggleTheme" class="toggle-theme" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="converter-container">
+        <!-- Tabs -->
+        <div class="converter-tabs">
+            <button class="tab-btn active" data-tab="pdf-to-images">📄 PDF → Imagens</button>
+            <button class="tab-btn" data-tab="images-to-pdf">🖼️ Imagens → PDF</button>
+        </div>
+
+        <!-- Upload -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-content">
+                <span class="upload-icon">📂</span>
+                <h3>Arraste seus arquivos aqui</h3>
+                <p class="upload-hint">ou clique para selecionar</p>
+                <input type="file" id="fileInput" multiple style="display: none;">
+            </div>
+        </div>
+
+        <!-- Grid PDF para Imagens -->
+        <div class="conversion-grid active" id="pdf-to-images">
+            <div class="conversion-card" data-conversion="pdf-to-png">
+                <div class="card-icon">🖼️</div>
+                <h4>PDF para PNG</h4>
+                <p>Alta qualidade com transparência</p>
+                <span class="format-badge">PNG</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-jpg">
+                <div class="card-icon">📸</div>
+                <h4>PDF para JPG</h4>
+                <p>Compactado e compatível</p>
+                <span class="format-badge">JPG</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-jpeg">
+                <div class="card-icon">📷</div>
+                <h4>PDF para JPEG</h4>
+                <p>Formato JPEG padrão</p>
+                <span class="format-badge">JPEG</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-webp">
+                <div class="card-icon">🌐</div>
+                <h4>PDF para WEBP</h4>
+                <p>Formato moderno da web</p>
+                <span class="format-badge">WEBP</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-bmp">
+                <div class="card-icon">🎨</div>
+                <h4>PDF para BMP</h4>
+                <p>Bitmap sem compressão</p>
+                <span class="format-badge">BMP</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-gif">
+                <div class="card-icon">🎞️</div>
+                <h4>PDF para GIF</h4>
+                <p>Para animações simples</p>
+                <span class="format-badge">GIF</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-tiff">
+                <div class="card-icon">📇</div>
+                <h4>PDF para TIFF</h4>
+                <p>Alta qualidade profissional</p>
+                <span class="format-badge">TIFF</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-avif">
+                <div class="card-icon">✨</div>
+                <h4>PDF para AVIF</h4>
+                <p>Última geração</p>
+                <span class="format-badge">AVIF</span>
+            </div>
+            <div class="conversion-card" data-conversion="pdf-to-heic">
+                <div class="card-icon">📱</div>
+                <h4>PDF para HEIC</h4>
+                <p>Alta eficiência (iOS)</p>
+                <span class="format-badge">HEIC</span>
+            </div>
+        </div>
+
+        <!-- Grid Imagens para PDF -->
+        <div class="conversion-grid" id="images-to-pdf">
+            <div class="conversion-card" data-conversion="png-to-pdf">
+                <div class="card-icon">🖼️</div>
+                <h4>PNG para PDF</h4>
+                <p>Imagens com transparência</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="jpg-to-pdf">
+                <div class="card-icon">📸</div>
+                <h4>JPG para PDF</h4>
+                <p>Fotos e imagens</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="jpeg-to-pdf">
+                <div class="card-icon">📷</div>
+                <h4>JPEG para PDF</h4>
+                <p>Formato JPEG padrão</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="webp-to-pdf">
+                <div class="card-icon">🌐</div>
+                <h4>WEBP para PDF</h4>
+                <p>Imagens da web</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="bmp-to-pdf">
+                <div class="card-icon">🎨</div>
+                <h4>BMP para PDF</h4>
+                <p>Bitmap sem perdas</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="gif-to-pdf">
+                <div class="card-icon">🎞️</div>
+                <h4>GIF para PDF</h4>
+                <p>Animações e gráficos</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="tiff-to-pdf">
+                <div class="card-icon">📇</div>
+                <h4>TIFF para PDF</h4>
+                <p>Alta resolução</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="avif-to-pdf">
+                <div class="card-icon">✨</div>
+                <h4>AVIF para PDF</h4>
+                <p>Formato moderno</p>
+                <span class="format-badge">PDF</span>
+            </div>
+            <div class="conversion-card" data-conversion="heic-to-pdf">
+                <div class="card-icon">📱</div>
+                <h4>HEIC para PDF</h4>
+                <p>Fotos de iPhone</p>
+                <span class="format-badge">PDF</span>
+            </div>
+        </div>
+
+        <!-- Lista de Arquivos -->
+        <div class="files-list" id="filesList">
+            <h4>Arquivos Selecionados:</h4>
+            <div id="selectedFiles"></div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast-container" id="toastContainer"></div>
+
+        <!-- Modal de Download -->
+        <div class="modal" id="downloadModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>✅ Conversão Concluída!</h3>
+                    <button class="modal-close" onclick="converter.closeModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage"></p>
+                    <div class="download-list" id="downloadList"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="converter.closeModal()">Fechar</button>
+                    <button class="btn btn-primary" id="downloadAllBtn">Download Todos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progresso -->
+        <div class="progress-area" id="progressArea" style="display: none;">
+            <div class="progress-info">
+                <span class="progress-filename">Convertendo...</span>
+                <span class="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="action-buttons">
+            <button class="btn btn-secondary" id="clearBtn">Limpar</button>
+            <button class="btn btn-primary" id="convertBtn">Converter Agora</button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Work tools</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2024 Work tools. Todos os direitos reservados.
+                </p>
+                <p class="footer-disclaimer">
+                    Ferramentas para fins profissionais e de desenvolvimento.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

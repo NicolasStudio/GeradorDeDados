@@ -22,14 +22,19 @@ function redirecionarCorrigirTexto(){
     window.location.href = "corrigirTexto.html";
 }
 
-
 function redirecionarLeitorPDF(){
     window.location.href = "leitorPDF.html";
 }
 
+function redirecionarConversorPDF(){
+    window.location.href = "conversorPDF.html";
+}
+
+function redirecionarConversorImagem(){
+    window.location.href = "conversorImagem.html";
+}
 
 // ====== GERENCIAMENTO DE TEMA (funciona em todas as páginas) ======
-
 // Inicializar tema quando a página carregar
 document.addEventListener('DOMContentLoaded', function() {
     // Configurar botão de tema
